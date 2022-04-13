@@ -28,4 +28,11 @@ class GameController(private val gameService: GameService, private val simpleMes
         simpleMessaging.convertAndSend("/topic/game-progress/${game.id.substring(0,8)}", game)
         return ResponseEntity.ok(game)
     }
+
+    @PostMapping("/playagain")
+    fun playAgain(@RequestBody request: GamePlay): ResponseEntity<Game> {
+        val game = gameService.playAgain(request)
+        simpleMessaging.convertAndSend("/topic/game-progress/${game.id.substring(0,8)}", game)
+        return ResponseEntity.ok(game)
+    }
 }

@@ -36,6 +36,22 @@ class GameService {
         return game
     }
 
+    fun playAgain(gamePlay: GamePlay): Game {
+        if (!GameStorage.getGames().containsKey(gamePlay.gameId))
+            throw NotFoundException("Game not found")
+
+        val game = GameStorage.getGames()[gamePlay.gameId]
+        if (game!!.state == GameState.FINISHED) throw InvalidGameException("Game is already finished")
+
+        game.clearBoard()
+        game.state = GameState.NEW
+        game.winner = null
+
+        GameStorage.setGame(game)
+
+        return game
+    }
+
     fun gamePlay(gamePlay: GamePlay): Game {
         if (!GameStorage.getGames().containsKey(gamePlay.gameId))
             throw NotFoundException("Game not found")
@@ -55,7 +71,7 @@ class GameService {
         return game
     }
 
-    private fun checkWinner(board: Array<IntArray>, ticToe: TicToe) : Boolean {
+    private fun checkWinner(board: Array<IntArray>, ticToe: TicToe): Boolean {
         val boardArray = IntArray(9)
         var counterIndex = 0
 
