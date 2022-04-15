@@ -63,6 +63,8 @@ class GameService {
         val game = GameStorage.getGames()[gamePlay.gameId]
         if (game!!.state == GameState.FINISHED) throw GameAlreadyFinishedException()
 
+        game.state = GameState.RUNNING
+
         val board = game.board
         board[gamePlay.coordinateX][gamePlay.coordinateY] = gamePlay.type!!.value
 

@@ -19,7 +19,9 @@ class GameController(private val gameService: GameService, private val simpleMes
 
     @PostMapping("/connect")
     fun connect(@RequestBody request: ConnectRequest): ResponseEntity<Game> {
-        return ResponseEntity.ok(gameService.connectToGame(request.gameId!!))
+        val game = gameService.connectToGame(request.gameId!!)
+        simpleMessaging.convertAndSend("/topic/game-progress/connected", game)
+        return ResponseEntity.ok(game)
     }
 
     @PostMapping("/gameplay")
