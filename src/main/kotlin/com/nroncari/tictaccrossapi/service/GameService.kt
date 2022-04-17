@@ -75,6 +75,7 @@ class GameService {
         if (oWinner) game.setWinnerGame(TicToe.O) else if (xWinner) game.setWinnerGame(TicToe.X)
 
         GameStorage.setGame(game)
+        log.info("Game with id: '${game.id}', ${gamePlay.type} played")
         return game
     }
 
