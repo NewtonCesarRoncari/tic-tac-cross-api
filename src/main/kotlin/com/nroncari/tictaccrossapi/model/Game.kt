@@ -1,5 +1,7 @@
 package com.nroncari.tictaccrossapi.model
 
+import com.nroncari.tictaccrossapi.exception.NumberPlayersException
+
 class Game(
     val id: String,
     var amountPlayers: Int = 0,
@@ -11,7 +13,7 @@ class Game(
     var oScore: Int = 0
 ) {
     fun addPlayer() {
-        //if (amountPlayers >= AMOUNT_PLAYERS_AVAILABLE) throw NumberPlayersException()
+        if (amountPlayers >= AMOUNT_PLAYERS_AVAILABLE) throw NumberPlayersException()
         amountPlayers++
     }
 
