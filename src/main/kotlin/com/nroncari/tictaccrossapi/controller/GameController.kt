@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin
 @RestController
 @RequestMapping("/game")
 class GameController(private val gameService: GameService, private val simpleMessaging: SimpMessagingTemplate) {
